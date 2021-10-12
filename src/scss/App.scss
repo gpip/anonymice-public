@@ -1,7 +1,266 @@
+body {
+    font-family: 'PixelFont';
+}
 
+.App {
+    width: 800px;
+    margin: 0 auto;
+}
 
-img{
-    width: 200px;
+button {
+    color: white;
+    background-color: black;
+    padding: 8px 10px;
+    font-family: 'PixelFont';
+    border: none;
+    cursor: pointer;
+    margin: 0 10px 0 0;
+
+    &:hover {
+        background-color: green;
+    }
+}
+
+.button-completed {
+    display: inline-block;
+    color: black;
+    background-color: white;
+    padding: 6px 10px;
+    font-family: 'PixelFont';
+    border: none;
+    border: 1px solid black;
+    margin: 0 10px 0 0;
+    font-size: 10px;
+
+}
+.header {
+
+    text-align: left;
+    border-bottom: 10px dashed black;
+    padding: 10px 10px 25px 10px;
+    margin: 0 0 30px 0;
+
+    .wallet-container {
+        float: right;
+        margin: 38px 0 0 0;
+    }
+
+    .logo {
+        font-size: 30px;
+        margin: 20px 0 10px 10px;
+    }
+
+    .top-nav {
+
+        font-size: 14px;
+        margin-left: -6px;
+
+        a {
+            padding: 5px 8px;
+            color: black;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    }
+}
+
+.content-block {
+
+    padding: 10px 20px;
+    border-bottom: 5px dashed black;
+    margin: 0 0 30px 0;
+
+    h2 {
+        font-size: 18px;
+        font-weight: normal;
+    }
+
+    p {
+        font-size: 10px;
+        width: 50%;
+    }
+
+    .action-box {
+        padding: 10px;
+        border: 1px solid black;
+        background-color: #efefef;
+
+        &.breeding-action {
+
+            margin: 30px 0 20px 0;
+            position: relative;
+            display: inline-block;
+            padding: 10px;
+
+            &::before {
+                content: "Ready to Breed??";
+                position: absolute;
+                font-weight: normal;
+                top: -25px;
+                background-color: black;
+                color: white;
+                left: -1px;
+                font-size: 11px;
+                padding: 4px 8px;
+            }
+        }
+
+        &.breeding-event {
+
+            border: 1px dashed #000;
+            padding: 30px 10px 0 10px;
+            margin: 0 0 20px 0;
+            display: flex;
+            flex-direction: row;
+
+            img {
+                width: 100px;
+            }
+
+            .locked-parents {
+                margin: 0 20px 0 0;
+
+                span {
+                    display: inline-block;
+                    position: relative;
+
+                    span {
+                        position: absolute;
+                        font-size: 10px;
+                        width: 100px;
+                        text-align: center;
+                    }
+                }
+
+                img {
+                    margin-bottom: -6px;
+                    image-rendering: pixelated;
+                }
+            }
+            .speed-ups {
+                p {
+                    width: auto;
+                    font-size: 16px;
+                    margin: 0 0 10px 0;
+                }
+
+                i {
+                    display: block;
+                    font-size: 9px;
+                    margin: 2px 0 0 0;
+                }
+
+                button,input {
+                    font-size: 11px;
+                    padding: 4px 8px;
+                }
+            }
+        }
+        
+        input {
+            background-color: white;
+            border: 1px solid black;
+            font-family: 'PixelFont';
+            font-size: 14px;
+            padding: 6px;
+            width: 100px;
+            margin: 0 10px 0 0;
+        }
+
+        .cheeth-icon {
+
+            position: relative;
+            margin: 0px 30px 0 20px;
+            padding: 3px 0 0 0;
+            font-size: 14px;
+
+            &::before {
+                content: "COST:";
+                font-size: 9px;
+                position: relative;
+
+            }
+
+            span {
+                display: inline-block;
+                margin: 0px 5px 0 5px;
+                font-size: 22px;
+            }
+        }
+    }
+}
+
+.cheeth-balance {
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+.mice-grid {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+    height: 105px;
+    overflow: hidden;
+
+    .card {
+        text-align: center;
+        padding: 1px;
+
+        img {
+            image-rendering: pixelated;
+            max-width: 100%;
+        }
+        span {
+            display: block;
+            font-size: 10px;
+        }
+    }
+}
+.baby-mice-container {
+
+   display: grid;
+   grid-template-columns: auto auto auto;
+
+    .baby-mouse {
+        border: 1px solid #ccc;
+        padding: 0px;
+        margin: 10px;
+        text-align: center;
+
+        img {
+            width: 235px;
+        }
+
+        .parent-images {
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 20px;
+            border-top: 1px dashed #ccc;
+            padding-top: 10px;
+            background-color: #333333;
+            
+
+            .parent-container {
+
+                position: relative;
+                
+                img {
+                    width: 50px;
+                    margin-bottom: -6px;
+                }
+                span {
+                    display: block;
+                    font-size: 9px;
+                    width: 100%;
+                    margin: 0;
+                    color: gray;
+
+                }
+            }
+            
+        }
+    }
 }
 .mice-container{
     display: flex;

@@ -1,6 +1,7 @@
 
 import { Route } from 'react-router-dom';
 
+import './scss/Fonts.scss';
 import './scss/App.scss';
 
 import useMetaMask from "./hooks/useMetaMask";
