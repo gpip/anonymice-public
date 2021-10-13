@@ -21,11 +21,11 @@ const BreedingEvent = (props) => {
             <div className="locked-parents">
                 <span>
                     
-                    <img src={`https://raw.githubusercontent.com/jozanza/anonymice-images/main/${props.breedingEvent.parentId1}.png`} /><span>{props.breedingEvent.parentId1}</span>
+                    <img src={props.breedingEvent.parent1Image}/><span>{props.breedingEvent.parentId1}</span>
                 </span>
                 <span>
                     
-                    <img src={`https://raw.githubusercontent.com/jozanza/anonymice-images/main/${props.breedingEvent.parentId2}.png`} /><span>{props.breedingEvent.parentId2}</span>
+                    <img src={props.breedingEvent.parent2Image} /><span>{props.breedingEvent.parentId2}</span>
                 </span>
             </div>
             <div className="speed-ups">
