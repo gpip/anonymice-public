@@ -18,19 +18,23 @@ const BreedingEvent = (props) => {
     const blocksLeft = props.currentBlock < parseInt(props.breedingEvent.releaseBlock) ? parseInt(props.breedingEvent.releaseBlock) - props.currentBlock : 0;
 
     return <div className="action-box breeding-event">
-        <div className="locked-parents">
-            <span>
-                <span>{props.breedingEvent.parentId1}</span>
-                <img src={`https://raw.githubusercontent.com/jozanza/anonymice-images/main/${props.breedingEvent.parentId1}.png`} />
-            </span>
-            <span>
-                <span>{props.breedingEvent.parentId2}</span>
-                <img src={`https://raw.githubusercontent.com/jozanza/anonymice-images/main/${props.breedingEvent.parentId2}.png`} />
-            </span>
-        </div>
-        <div className="speed-ups">
-            <p>Blocks left: {blocksLeft}<i>Approx {Math.floor(blocksLeft * 12 / 24)} hours</i></p>
-            <p><i>Approx $CHEETH to zero blocks: {Math.ceil((blocksLeft * 0.0005) * 10) / 10}</i></p>
+            <div className="locked-parents">
+                <span>
+                    
+                    <img src={`https://raw.githubusercontent.com/jozanza/anonymice-images/main/${props.breedingEvent.parentId1}.png`} /><span>{props.breedingEvent.parentId1}</span>
+                </span>
+                <span>
+                    
+                    <img src={`https://raw.githubusercontent.com/jozanza/anonymice-images/main/${props.breedingEvent.parentId2}.png`} /><span>{props.breedingEvent.parentId2}</span>
+                </span>
+            </div>
+            <div className="speed-ups">
+
+                {
+                    (Math.ceil((blocksLeft * 0.0005) * 10) / 10) == 0
+                    ? <p>These parents are ready to unlock</p>
+                    : <><p>Blocks left: {blocksLeft}<i>Approx {Math.floor(blocksLeft * 12 / 24)} hours</i></p><p>Approx 🧀 speed-up cost: {Math.ceil((blocksLeft * 0.0005) * 10) / 10}</p></>
+                }
 
             {
                 blocksLeft == 0
@@ -42,10 +46,14 @@ const BreedingEvent = (props) => {
                         }}> Speed up </button></>
             }
 
+<<<<<<< HEAD
 
 
 
         </div>
+=======
+            </div>
+>>>>>>> 2caf93bd4a6101ca6d9794d9cb615bf4ee9db668
     </div>
 }
 
