@@ -80,6 +80,9 @@ const BabyMouse = (props) => {
 
         {props.babyMouse.revealed ? '' : <>
 
+            Blocks left: 234234 <br/>
+            Time left: 84hrs<br/>
+            Cheeth to reveal: 3<br/>
             <input className="input-cheeth" value={cheethInput} placeholder="🧀 qty" onChange={(e) => { setCheethInput(e.target.value) }} />
             <button onClick={() => {
                 var cheethAmount = web3.utils.toWei(cheethInput, 'ether');
