@@ -1,10 +1,10 @@
 
 if (process.env.REACT_APP_TESTNET === "true") {
     //Testnet address
-    module.exports.contractAddress = "0xa8a827F7aE50802aDe811A6E63e1865bFa4F067B";
+    module.exports.contractAddress = "0x1B9E47A0FF44996413382b8ca71A72c6E0f2a0f0";
 } else {
     //Live address
-    module.exports.contractAddress = "0xa8a827F7aE50802aDe811A6E63e1865bFa4F067B";
+    module.exports.contractAddress = "0x1B9E47A0FF44996413382b8ca71A72c6E0f2a0f0";
 }
 
 module.exports.contractAbi =  [

@@ -29,7 +29,8 @@ const BreedingEvent = (props) => {
                 </span>
             </div>
             <div className="speed-ups">
-                <p>Blocks left: {props.currentBlock < parseInt(props.breedingEvent.releaseBlock) ? parseInt(props.breedingEvent.releaseBlock) - props.currentBlock : 0}<i>Approx 84 hours</i></p>
+                <p>Blocks left: {blocksLeft}<i>Approx {Math.floor(blocksLeft * 12 / 24)} hours</i></p>
+                <p><i>Approx $CHEETH to zero blocks: {Math.ceil((blocksLeft * 0.0005) * 10) / 10}</i></p>
 
                 {
                     blocksLeft == 0
