@@ -33,6 +33,7 @@ button {
     font-size: 10px;
 
 }
+
 .header {
 
     text-align: left;
@@ -165,6 +166,10 @@ button {
             padding: 6px;
             width: 100px;
             margin: 0 10px 0 0;
+
+            &.input-cheeth {
+                width: 60px;
+            }
         }
 
         .cheeth-icon {
