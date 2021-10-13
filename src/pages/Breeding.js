@@ -21,11 +21,11 @@ const BreedingEvent = (props) => {
         <div className="locked-parents">
             <span>
                 <span>{props.breedingEvent.parentId1}</span>
-                <img src={props.breedingEvent.parent1Image} />
+                <img src={`https://raw.githubusercontent.com/jozanza/anonymice-images/main/${props.breedingEvent.parentId1}.png`} />
             </span>
             <span>
                 <span>{props.breedingEvent.parentId2}</span>
-                <img src={props.breedingEvent.parent2Image} />
+                <img src={`https://raw.githubusercontent.com/jozanza/anonymice-images/main/${props.breedingEvent.parentId2}.png`} />
             </span>
         </div>
         <div className="speed-ups">
@@ -189,8 +189,8 @@ export default function Breeding(props) {
                     parentTokenURI(breedingEvent.parentId2)
                 ]);
 
-                breedingEvent.parent1Image = JSON.parse(atob(parent1Image.split(",")[1])).image;
-                breedingEvent.parent2Image = JSON.parse(atob(parent2Image.split(",")[1])).image;
+                breedingEvent.parent1Image= JSON.parse(atob(parent1Image.split(",")[1])).image;
+                breedingEvent.parent2Image= JSON.parse(atob(parent2Image.split(",")[1])).image;
 
                 return breedingEvent
             }))
