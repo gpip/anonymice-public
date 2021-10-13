@@ -46,14 +46,7 @@ const BreedingEvent = (props) => {
                         }}> Speed up </button></>
             }
 
-<<<<<<< HEAD
-
-
-
-        </div>
-=======
             </div>
->>>>>>> 2caf93bd4a6101ca6d9794d9cb615bf4ee9db668
     </div>
 }
 
