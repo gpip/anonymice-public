@@ -67,7 +67,7 @@ export default function useAnonymiceBreedingContract({ addTransaction, editTrans
         }
     }
 
-    const pullParents = async (userAddress, index) => {
+    const pullParents = async (userAddress, breedingEventId) => {
 
         try {
             const transaction = await window.ethereum.request({
@@ -76,7 +76,7 @@ export default function useAnonymiceBreedingContract({ addTransaction, editTrans
                     //nonce: accountNonce,
                     from: userAddress,
                     to: contractAddress,
-                    data: AnonymiceBreeding.methods.pullParentsByBreedingEventIndex(index).encodeABI(),
+                    data: AnonymiceBreeding.methods.pullParentsByBreedingEventId(breedingEventId).encodeABI(),
                 }]
             })
 
@@ -97,7 +97,7 @@ export default function useAnonymiceBreedingContract({ addTransaction, editTrans
     }
 
 
-    const speedUpParentRelease = async (userAddress, breedingIndex, cheethAmount) => {
+    const speedUpParentRelease = async (userAddress, breedingEventId, cheethAmount) => {
 
         try {
             const transaction = await window.ethereum.request({
@@ -106,7 +106,7 @@ export default function useAnonymiceBreedingContract({ addTransaction, editTrans
                     //nonce: accountNonce,
                     from: userAddress,
                     to: contractAddress,
-                    data: AnonymiceBreeding.methods.speedUpParentRelease(breedingIndex, cheethAmount).encodeABI(),
+                    data: AnonymiceBreeding.methods.speedUpParentRelease(breedingEventId, cheethAmount).encodeABI(),
                 }]
             })
 
@@ -128,7 +128,7 @@ export default function useAnonymiceBreedingContract({ addTransaction, editTrans
 
 
 
-    const speedUpChildReveal = async (userAddress, breedingIndex, cheethAmount) => {
+    const speedUpChildReveal = async (userAddress, childId, cheethAmount) => {
 
         try {
             const transaction = await window.ethereum.request({
@@ -137,7 +137,7 @@ export default function useAnonymiceBreedingContract({ addTransaction, editTrans
                     //nonce: accountNonce,
                     from: userAddress,
                     to: contractAddress,
-                    data: AnonymiceBreeding.methods.speedUpChildReveal(breedingIndex, cheethAmount).encodeABI(),
+                    data: AnonymiceBreeding.methods.speedUpChildReveal(childId, cheethAmount).encodeABI(),
                 }]
             })
 

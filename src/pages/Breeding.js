@@ -10,31 +10,44 @@ import useAnonymiceBreedingContract from '../hooks/useAnonymiceBreedingContract'
 import useAnonymiceBreedingDescriptorContract from '../hooks/useAnonymiceBreedingDescriptorContract'
 const MySwal = withReactContent(Swal);
 
-
 const { contractAddress: breedingContractAddress } = require('../config/AnonymiceBreedingContract');
+
+const blocksLeftCalc = (currentBlock, targetBlock) => currentBlock < parseInt(targetBlock) ? parseInt(targetBlock) - currentBlock : 0;
+const cheethCalc = (blocksLeft) => Math.ceil((blocksLeft * 0.0005) * 10) / 10;
+const timeCalc = (blocksLeft) => `${Math.floor(blocksLeft * 12 / 60 / 60)} hours`;
+
+
 
 const BreedingEvent = (props) => {
     const [cheethInput, setCheethInput] = useState("");
-    const blocksLeft = props.currentBlock < parseInt(props.breedingEvent.releaseBlock) ? parseInt(props.breedingEvent.releaseBlock) - props.currentBlock : 0;
+    const blocksLeft = blocksLeftCalc(props.currentBlock, props.breedingEvent.releaseBlock);
 
     return <div className="action-box breeding-event">
-            <div className="locked-parents">
-                <span>
-                    
-                    <img src={props.breedingEvent.parent1Image}/><span>{props.breedingEvent.parentId1}</span>
-                </span>
-                <span>
-                    
-                    <img src={props.breedingEvent.parent2Image} /><span>{props.breedingEvent.parentId2}</span>
-                </span>
-            </div>
-            <div className="speed-ups">
+        <div className="locked-parents">
+            <span>
 
-                {
-                    (Math.ceil((blocksLeft * 0.0005) * 10) / 10) == 0
+                <img src={props.breedingEvent.parent1Image} /><span>{props.breedingEvent.parentId1}</span>
+            </span>
+            <span>
+
+                <img src={props.breedingEvent.parent2Image} /><span>{props.breedingEvent.parentId2}</span>
+            </span>
+        </div>
+        <div className="speed-ups">
+
+            {
+                blocksLeft == 0
                     ? <p>These parents are ready to unlock</p>
-                    : <><p>Blocks left: {blocksLeft}<i>Approx {Math.floor(blocksLeft * 12 / 24)} hours</i></p><p>Approx 🧀 speed-up cost: {Math.ceil((blocksLeft * 0.0005) * 10) / 10}</p></>
-                }
+                    : <>
+                        <p>
+                            Blocks left: {blocksLeft}
+                            <i>Approx {timeCalc(blocksLeft)}</i>
+                        </p>
+                        <p>
+                            Approx 🧀 speed-up cost: {cheethCalc(blocksLeft)}
+                        </p>
+                    </>
+            }
 
             {
                 blocksLeft == 0
@@ -46,18 +59,16 @@ const BreedingEvent = (props) => {
                         }}> Speed up </button></>
             }
 
-            </div>
+        </div>
     </div>
 }
 
 
 const BabyMouse = (props) => {
     const [cheethInput, setCheethInput] = useState("");
+    const blocksLeft = blocksLeftCalc(props.currentBlock, props?.babyMouse?.incubator?.revealBlock)
 
     return <div className="action-box baby-mouse">
-
-
-
         <img src={props.babyMouse.image} />
         <div>#{props.babyMouse.tokenId}</div>
 
@@ -78,18 +89,20 @@ const BabyMouse = (props) => {
         }
 
 
-        {props.babyMouse.revealed ? '' : <>
+        {
+            blocksLeft == 0 ?
+                <> <button onClick={() => props.handlers.reveal(props?.userWallet?.address, props.babyMouse.tokenId)}> Reveal </button></>
+                : <>
+                    <p>Blocks left: {blocksLeft} <br /></p>
+                    <p>Time left: {timeCalc(blocksLeft)}<br /></p>
+                    <p>Cheeth to reveal:{cheethCalc(blocksLeft)}<br /></p>
 
-            Blocks left: 234234 <br/>
-            Time left: 84hrs<br/>
-            Cheeth to reveal: 3<br/>
-            <input className="input-cheeth" value={cheethInput} placeholder="🧀 qty" onChange={(e) => { setCheethInput(e.target.value) }} />
-            <button onClick={() => {
-                var cheethAmount = web3.utils.toWei(cheethInput, 'ether');
-                props.handlers.speedUpChildReveal(props?.userWallet?.address, props.babyMouse.tokenId, cheethAmount);
-            }}> Speed up </button>
-            <button onClick={() => props.handlers.reveal(props?.userWallet?.address, props.babyMouse.tokenId)}> Reveal </button>
-        </>
+                    <input className="input-cheeth" value={cheethInput} placeholder="🧀 qty" onChange={(e) => { setCheethInput(e.target.value) }} />
+                    <button onClick={() => {
+                        var cheethAmount = web3.utils.toWei(cheethInput, 'ether');
+                        props.handlers.speedUpChildReveal(props?.userWallet?.address, props.babyMouse.tokenId, cheethAmount);
+                    }}> Speed up </button>
+                </>
         }
     </div>
 }
@@ -191,8 +204,8 @@ export default function Breeding(props) {
                     parentTokenURI(breedingEvent.parentId2)
                 ]);
 
-                breedingEvent.parent1Image= JSON.parse(atob(parent1Image.split(",")[1])).image;
-                breedingEvent.parent2Image= JSON.parse(atob(parent2Image.split(",")[1])).image;
+                breedingEvent.parent1Image = JSON.parse(atob(parent1Image.split(",")[1])).image;
+                breedingEvent.parent2Image = JSON.parse(atob(parent2Image.split(",")[1])).image;
 
                 return breedingEvent
             }))
