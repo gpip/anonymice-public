@@ -32,7 +32,7 @@ export default function useAnonymiceBreedingContract({ addTransaction, editTrans
         for (var i = 0; i < breedingAmount; i++) {
             const breedingEvent = await AnonymiceBreeding.methods._addressToBreedingEvents(userAddress, i).call();
             breedingEvent.breedingEventId = breedingEvent.breedingEventId;
-            breedingEvents.push(breedingEvent)
+            breedingEvents.push(breedingEvent);
         }
 
         return breedingEvents

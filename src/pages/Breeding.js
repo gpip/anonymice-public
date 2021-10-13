@@ -18,34 +18,34 @@ const BreedingEvent = (props) => {
     const blocksLeft = props.currentBlock < parseInt(props.breedingEvent.releaseBlock) ? parseInt(props.breedingEvent.releaseBlock) - props.currentBlock : 0;
 
     return <div className="action-box breeding-event">
-            <div className="locked-parents">
-                <span>
-                    <span>{props.breedingEvent.parentId1}</span>
-                    <img src={`https://raw.githubusercontent.com/jozanza/anonymice-images/main/${props.breedingEvent.parentId1}.png`} />
-                </span>
-                <span>
-                    <span>{props.breedingEvent.parentId2}</span>
-                    <img src={`https://raw.githubusercontent.com/jozanza/anonymice-images/main/${props.breedingEvent.parentId2}.png`} />
-                </span>
-            </div>
-            <div className="speed-ups">
-                <p>Blocks left: {blocksLeft}<i>Approx {Math.floor(blocksLeft * 12 / 24)} hours</i></p>
-                <p><i>Approx $CHEETH to zero blocks: {Math.ceil((blocksLeft * 0.0005) * 10) / 10}</i></p>
+        <div className="locked-parents">
+            <span>
+                <span>{props.breedingEvent.parentId1}</span>
+                <img src={props.breedingEvent.parent1Image} />
+            </span>
+            <span>
+                <span>{props.breedingEvent.parentId2}</span>
+                <img src={props.breedingEvent.parent2Image} />
+            </span>
+        </div>
+        <div className="speed-ups">
+            <p>Blocks left: {blocksLeft}<i>Approx {Math.floor(blocksLeft * 12 / 24)} hours</i></p>
+            <p><i>Approx $CHEETH to zero blocks: {Math.ceil((blocksLeft * 0.0005) * 10) / 10}</i></p>
 
-                {
-                    blocksLeft == 0
+            {
+                blocksLeft == 0
                     ? <button onClick={() => props.handlers.pullParents(props?.userWallet?.address, props.breedingEvent.breedingEventId)}> Unlock Parents </button>
                     : <><input value={cheethInput} placeholder="🧀 Amount" onChange={(e) => { setCheethInput(e.target.value) }} />
-                    <button onClick={() => {
-                        var cheethAmount = web3.utils.toWei(cheethInput, 'ether');
-                        props.handlers.speedUpParentRelease(props?.userWallet?.address, props.breedingEvent.breedingEventId, cheethAmount);
-                    }}> Speed up </button></>
-                }
+                        <button onClick={() => {
+                            var cheethAmount = web3.utils.toWei(cheethInput, 'ether');
+                            props.handlers.speedUpParentRelease(props?.userWallet?.address, props.breedingEvent.breedingEventId, cheethAmount);
+                        }}> Speed up </button></>
+            }
 
-                
 
-                
-            </div>
+
+
+        </div>
     </div>
 }
 
@@ -55,7 +55,7 @@ const BabyMouse = (props) => {
 
     return <div className="baby-mouse">
 
-        
+
 
         <img src={props.babyMouse.image} />
         <span>
@@ -146,9 +146,15 @@ export default function Breeding(props) {
             setCheethBalance(cheethBalance);
             setApprovedForAll(approvedForAll);
             setAllowance(allowance);
-            setMyMice(myMice);
             setCurrentBlock(parseInt(currentBlock));
-            console.log('d')
+
+            myMice = await Promise.all(myMice.map(async mouse => {
+                const tokenURI = await parentTokenURI(mouse);
+                return {
+                    id: mouse,
+                    image: JSON.parse(atob(tokenURI.split(",")[1])).image
+                }
+            }))
 
             babyMice = await Promise.all(babyMice.map(async babyMouse => {
                 var childImage = await tokenURI(babyMouse);
@@ -176,6 +182,20 @@ export default function Breeding(props) {
                 };
             }))
 
+            breedingEvents = await Promise.all(breedingEvents.map(async breedingEvent => {
+
+                let [parent1Image, parent2Image] = await Promise.all([
+                    parentTokenURI(breedingEvent.parentId1),
+                    parentTokenURI(breedingEvent.parentId2)
+                ]);
+
+                breedingEvent.parent1Image = JSON.parse(atob(parent1Image.split(",")[1])).image;
+                breedingEvent.parent2Image = JSON.parse(atob(parent2Image.split(",")[1])).image;
+
+                return breedingEvent
+            }))
+
+            setMyMice(myMice);
             setBabyMice(babyMice)
             setBreedingEvents(breedingEvents);
         } catch (error) {
@@ -209,16 +229,16 @@ export default function Breeding(props) {
 
             <div className="content-block">
                 <h2>Available Parents</h2>
-                <p>These are your available parents. <br/>Select 2 to breed together. <br/>It costs 50 cheeth to breed.</p>
+                <p>These are your available parents. <br />Select 2 to breed together. <br />It costs 50 cheeth to breed.</p>
                 <div className="mice-grid">
                     {myMice.map(mouse => {
                         return <div className="card">
-                            <img src={`https://raw.githubusercontent.com/jozanza/anonymice-images/main/${mouse}.png`} />
-                            <span>{mouse}</span>
+                            <img src={mouse.image} />
+                            <span>{mouse.id}</span>
                         </div>
                     })}
                 </div>
-            
+
                 {
                     approvedForAll
                         ? <div className="button-completed">✔️ Breeding Approved</div>
