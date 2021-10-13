@@ -29,7 +29,6 @@ const BreedingEvent = (props) => {
                 </span>
             </div>
             <div className="speed-ups">
-                
 
                 {
                     (Math.ceil((blocksLeft * 0.0005) * 10) / 10) == 0
@@ -47,9 +46,6 @@ const BreedingEvent = (props) => {
                     }}> Speed up </button></>
                 }
 
-                
-
-                
             </div>
     </div>
 }
