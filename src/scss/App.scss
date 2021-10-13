@@ -200,6 +200,7 @@ button {
 .cheeth-balance {
     margin: 20px 0;
     font-size: 14px;
+    overflow: hidden;
 }
 
 .mice-grid {
@@ -348,6 +349,107 @@ button {
             .status {
                 font-size: 10px;
                 text-align: center;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 590px) {
+    .App {
+        width: 100%;
+    }
+    .header {
+        padding: 10px 10px 15px 10px;
+        margin: 0 0 10px 0;
+        .wallet-container {
+            margin: 0;
+            font-size: 9px;
+        }
+        .logo {
+            font-size: 25px;
+            margin: 0 0 5px 0;
+        }
+        .top-nav {
+            font-size: 10px;
+            margin-left: -10px;
+
+            a {
+                padding: 5px;
+                margin: 0 5px;
+            }
+        }
+    }
+    .content-block {
+        padding: 10px;
+
+        h2 {
+            font-size: 13px;
+        }
+        p {
+            font-size: 9px;
+            width: 90%;
+        }
+
+        .action-box {
+            input, button {
+                font-size: 10px;
+            }
+            input {
+                width: 80px;
+                padding: 3px;
+            }
+            button {
+                padding: 3px 5px;
+            }
+
+            p {
+                font-size: 9px;
+            }
+
+            &.breeding-event {
+
+                .locked-parents {
+
+                    display: flex;
+                    img {
+                        width: 70px;
+                    }
+
+                    span {
+                        span {
+                            width: 70px;
+                        }
+                    }
+                }
+
+                .speed-ups {
+                    p {
+                        font-size: 10px;
+                    }
+                }
+
+                
+                
+            }
+        }
+    }
+    .mice-grid {
+        grid-template-columns: auto auto auto auto auto;
+        height: 205px;
+    }
+    .baby-mice-container {
+        grid-template-columns: auto;
+
+        .baby-mouse {
+            border: none;
+            border-bottom: 1px dashed black;
+            padding-bottom: 30px;
+            margin: 0 0 30px 0;
+
+            img {
+                display: block;
+                width: 100%;
+                margin-bottom: 10px;
             }
         }
     }

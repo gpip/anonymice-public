@@ -39,7 +39,7 @@ const BreedingEvent = (props) => {
             {
                 blocksLeft == 0
                     ? <button onClick={() => props.handlers.pullParents(props?.userWallet?.address, props.breedingEvent.breedingEventId)}> Unlock Parents </button>
-                    : <><input value={cheethInput} placeholder="🧀 Amount" onChange={(e) => { setCheethInput(e.target.value) }} />
+                    : <><input className="input-cheeth" value={cheethInput} placeholder="🧀 qty" onChange={(e) => { setCheethInput(e.target.value) }} />
                         <button onClick={() => {
                             var cheethAmount = web3.utils.toWei(cheethInput, 'ether');
                             props.handlers.speedUpParentRelease(props?.userWallet?.address, props.breedingEvent.breedingEventId, cheethAmount);
@@ -54,14 +54,12 @@ const BreedingEvent = (props) => {
 const BabyMouse = (props) => {
     const [cheethInput, setCheethInput] = useState("");
 
-    return <div className="baby-mouse">
+    return <div className="action-box baby-mouse">
 
 
 
         <img src={props.babyMouse.image} />
-        <span>
-            #{props.babyMouse.tokenId}
-        </span>
+        <div>#{props.babyMouse.tokenId}</div>
 
         {
             props.babyMouse.revealed
@@ -82,7 +80,7 @@ const BabyMouse = (props) => {
 
         {props.babyMouse.revealed ? '' : <>
 
-            <input value={cheethInput} placeholder="Cheeth Amount" onChange={(e) => { setCheethInput(e.target.value) }} />
+            <input className="input-cheeth" value={cheethInput} placeholder="🧀 qty" onChange={(e) => { setCheethInput(e.target.value) }} />
             <button onClick={() => {
                 var cheethAmount = web3.utils.toWei(cheethInput, 'ether');
                 props.handlers.speedUpChildReveal(props?.userWallet?.address, props.babyMouse.tokenId, cheethAmount);
