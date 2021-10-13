@@ -20,12 +20,12 @@ const BreedingEvent = (props) => {
     return <div className="action-box breeding-event">
             <div className="locked-parents">
                 <span>
-                    <span>{props.breedingEvent.parentId1}</span>
-                    <img src={`https://raw.githubusercontent.com/jozanza/anonymice-images/main/${props.breedingEvent.parentId1}.png`} />
+                    
+                    <img src={`https://raw.githubusercontent.com/jozanza/anonymice-images/main/${props.breedingEvent.parentId1}.png`} /><span>{props.breedingEvent.parentId1}</span>
                 </span>
                 <span>
-                    <span>{props.breedingEvent.parentId2}</span>
-                    <img src={`https://raw.githubusercontent.com/jozanza/anonymice-images/main/${props.breedingEvent.parentId2}.png`} />
+                    
+                    <img src={`https://raw.githubusercontent.com/jozanza/anonymice-images/main/${props.breedingEvent.parentId2}.png`} /><span>{props.breedingEvent.parentId2}</span>
                 </span>
             </div>
             <div className="speed-ups">
@@ -85,6 +85,7 @@ const BabyMouse = (props) => {
         {props.babyMouse.revealed ? '' : <>
 
             <div className="speed-ups">Blocks left: 23432
+            
             {
                 blocksLeft == 0
                 ? <button onClick={() => props.handlers.reveal(props?.userWallet?.address, props.babyMouse.tokenId)}> Reveal! </button>
@@ -235,7 +236,7 @@ export default function Breeding(props) {
                         </div>
                     })}
                 </div>
-            
+                <h2>Contract Approvals</h2>
                 {
                     approvedForAll
                         ? <div className="button-completed">✔️ Breeding Approved</div>
@@ -255,8 +256,8 @@ export default function Breeding(props) {
                 <div className="cheeth-balance">🧀: {cheethBalance ? web3.utils.fromWei(cheethBalance, 'ether') : ''}</div>
 
                 <div className="action-box breeding-action">
-                    <input value={miceInput[0]} placeholder="Parent ID 1" onChange={(e) => { handleMouseInput(0, e.target.value) }} />
-                    <input value={miceInput[1]} placeholder="Parent ID 2" onChange={(e) => { handleMouseInput(1, e.target.value) }} />
+                    <input value={miceInput[0]} placeholder="Parent ID" onChange={(e) => { handleMouseInput(0, e.target.value) }} />+
+                    <input value={miceInput[1]} placeholder="Parent ID" onChange={(e) => { handleMouseInput(1, e.target.value) }} />
                     <span className="cheeth-icon"><span>🧀</span>50</span>
                     <button onClick={() => {
                         initiateBreeding(props?.userWallet?.address, miceInput[0], miceInput[1]);
